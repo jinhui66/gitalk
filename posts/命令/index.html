@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>相关命令行 | My WSL Website</title>
+  <meta name="description" content="介绍在Windows上，有关WSL的命令行">
+
+  <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/static/css/main.css" media="all">
+
+  <link rel="stylesheet" href="/static/css/gitalk.css">
+  <script src="/static/js/gitalk.min.js"></script>
+
+</head>
+<body>
+  
+<nav class="navbar">
+  <div class="navbar__inner">
+    <a class="navbar__logo" href="/">My WSL Website</a>
+
+    <div class="navbar__mobile-options">
+      <div class="navbar__button dark-toggle" aria-label="toggle dark theme">
+        <img src="/static/img/moon.svg" alt="">
+      </div>
+      <button class="navbar__button navbar__hamburger" aria-expanded="false" aria-label="toggle menu">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#333333">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="navbar__links">
+      
+        <a class="navbar__link " href="/pages/about/">
+          简介
+        </a>
+        <a class="navbar__link " href="/">
+          主页
+        </a>
+        <a class="navbar__link " href="/tags/">
+          标签
+        </a>
+
+      <!-- 按钮 --> 
+      <div class="navbar__button dark-toggle" aria-label="toggle dark theme">
+        <img src="/static/img/moon.svg" alt="">
+      </div>
+
+    </div>
+  </div>
+
+  <div class="navbar__mobile-links">
+    
+      <a class="navbar__mobile-link " href="/pages/about/">
+        简介
+      </a>
+      <a class="navbar__mobile-link " href="/">
+        主页
+      </a>
+      <a class="navbar__mobile-link " href="/tags/">
+        标签
+      </a>
+  </div>
+
+</nav>
+
+  
+<div class="container-sm">
+  <h1>相关命令行</h1>
+  <blockquote>
+<p>wsl -l<br>
+//列出当前系统上已经安装的Linux子系统名称</p>
+</blockquote>
+<blockquote>
+<p>wsl --set-version &lt;Distro&gt; 2
+可以设置一个 Linux 发行版的 WSL 版本。命令中的 &lt;Distro&gt; 替换为你安装的 Linux 发型版本的名称，也就是前面通过 wsl -l 查询到的名称</p>
+</blockquote>
+<blockquote>
+<p>wsl -l -v         //列出linux子系统以及版本
+<img src="/static/img/images/image-5.png" alt="alt text">
+wsl --unregister Ubuntu         //注销
+<img src="/static/img/images/image-6.png" alt="alt text"></p>
+</blockquote>
+<blockquote>
+<p>wsl    //进入linux系统
+<img src="/static/img/images/image-7.png" alt="alt text"></p>
+</blockquote>
+
+
+  <br><hr>
+  
+    <b>Tags: </b>
+    
+      
+    
+      
+        <a href="/tags/command">command</a>
+      
+    
+  
+  <br><br>
+  
+  <a href="/">&larr; Back home</a>
+  <!-- GitTalk 评论开始 -->  
+    <div id="gitalk-container"></div>  
+    <link rel="stylesheet" href="/static/css/gitalk.css">  
+    <script src="/static/js/gitalk.min.js"></script>  
+    <script>  
+    var gitalk = new Gitalk({  
+      clientID: '01833724746bc911fcc0',  
+      clientSecret: 'a9eb76fcc9aa6faa298c0fcf6d0aceebc59cfa38',  
+      repo: 'gitalk',  
+      owner: 'jinhui66',  
+      admin: ['jinhui66'],  
+      id: location.pathname,      // Ensure uniqueness and length less than 50  
+      distractionFreeMode: false  // Facebook-like distraction free mode  
+    })  
+    gitalk.render('gitalk-container')  
+    
+    </script>  
+  <!-- GitTalk 评论结束 -->
+</div>
+
+  <footer class="footer">
+  &copy; 2024 - My WSL Website
+</footer>
+
+  <script>
+    const ham = document.querySelector('.navbar__hamburger')
+    const menu = document.querySelector('.navbar__mobile-links')
+    const darkToggleButtons = document.querySelectorAll('.dark-toggle')
+
+    function changeDarkToggleBtnIcon () {
+      darkToggleButtons.forEach(btn => {
+        if (btn.querySelector('img').src.indexOf('/static/img/moon.svg') !== -1) {
+          btn.querySelector('img').src = "/static/img/sun.svg"
+        } else {
+          btn.querySelector('img').src = "/static/img/moon.svg"
+        }
+      })
+    }
+
+    if (
+      localStorage.prefsDark === 'true' || 
+      (
+        window.matchMedia && 
+        window.matchMedia('(prefers-color-scheme: dark)').matches && 
+        localStorage.prefsDark !== 'false')
+      ) {
+      document.body.classList.add('dark')
+      changeDarkToggleBtnIcon()
+    }
+
+    ham.addEventListener('click', () => {
+      menu.classList.toggle('navbar__mobile-links--open')
+
+      let prevState = JSON.parse(ham.getAttribute('aria-expanded'))
+      ham.setAttribute('aria-expanded', !prevState)
+    })
+
+    darkToggleButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        changeDarkToggleBtnIcon()
+
+        if (document.body.classList.contains('dark')) {
+          document.body.classList.remove('dark')
+          localStorage.prefsDark = 'false'
+        } else {
+          document.body.classList.add('dark')
+          localStorage.prefsDark = 'true'
+        }
+
+      })
+    })
+  </script>
+</body>
+</html>

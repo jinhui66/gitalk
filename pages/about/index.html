@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About WSL | My WSL Website</title>
+  <meta name="description" content="All about me in this page">
+
+  <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/static/css/main.css" media="all">
+
+  <link rel="stylesheet" href="/static/css/gitalk.css">
+  <script src="/static/js/gitalk.min.js"></script>
+
+</head>
+<body>
+  
+<nav class="navbar">
+  <div class="navbar__inner">
+    <a class="navbar__logo" href="/">My WSL Website</a>
+
+    <div class="navbar__mobile-options">
+      <div class="navbar__button dark-toggle" aria-label="toggle dark theme">
+        <img src="/static/img/moon.svg" alt="">
+      </div>
+      <button class="navbar__button navbar__hamburger" aria-expanded="false" aria-label="toggle menu">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#333333">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="navbar__links">
+      
+        <a class="navbar__link navbar__link--active" href="/pages/about/">
+          简介
+        </a>
+        <a class="navbar__link " href="/">
+          主页
+        </a>
+        <a class="navbar__link " href="/tags/">
+          标签
+        </a>
+
+      <!-- 按钮 --> 
+      <div class="navbar__button dark-toggle" aria-label="toggle dark theme">
+        <img src="/static/img/moon.svg" alt="">
+      </div>
+
+    </div>
+  </div>
+
+  <div class="navbar__mobile-links">
+    
+      <a class="navbar__mobile-link navbar__mobile-link--active" href="/pages/about/">
+        简介
+      </a>
+      <a class="navbar__mobile-link " href="/">
+        主页
+      </a>
+      <a class="navbar__mobile-link " href="/tags/">
+        标签
+      </a>
+  </div>
+
+</nav>
+
+  
+<div class="container-sm">
+  <h1>About WSL</h1>
+  <p>wsl是一个适用于Windows的Linux子系统</p>
+<p>Windows Subsystem for Linux（简称WSL）是一个在Windows 10\11上能够运行原生Linux二进制可执行文件（ELF格式）的兼容层。它是由微软与Canonical公司合作开发，其目标是使纯正的Ubuntu、Debian等映像能下载和解压到用户的本地计算机，并且映像内的工具和实用工具能在此子系统上原生运行。
+如果使用Windows 10 2004以上，可以通过WSL 2来窗口化运行桌面应用，也不需要另外安装其他的X 服务器。
+2022年9月22日，IT之家消息，微软发布了 Windows 11/10 的 Linux 子系统新预览版，版本号为 0.67.6。
+2022年11月16日，微软 Win11/10 Linux 子系统 WSL 1.0.0 正式版发布。</p>
+<h2>简介</h2>
+<p>WSL提供了一个微软开发的Linux兼容内核接口（不包含Linux代码），来自Ubuntu的用户模式二进制文件在其上运行。
+该子系统不能运行所有Linux软件，例如那些图形用户界面，以及那些需要未实现的Linux内核服务的软件。不过，这可以用在外部X服务器上运行的图形X Window系统缓解。
+此子系统起源于命运多舛的Astoria项目，其目的是允许Android应用运行在Windows 10 Mobile上。此功能组件从Windows 10 Insider Preview build 14316开始可用。
+2022年9月 22日，微软发布了 Windows 11/10 的 Linux 子系统新预览版，微软宣布从该版本开始，WSL 已支持 systemd。</p>
+<h2>历史背景</h2>
+<p>在设计之初，微软就允许类似于Win32这种子系统运行于Windows NT内核之上，它可以为上层应用提供编程接口，同时避免应用去实现内核里的一些调用细节。NT内核的设计在最开始就可以支持POSIX，OS/2和win32子系统。
+早先的子系统是用户态模块的实现，它封装了NT系统的系统调用为应用程序提供编程接口。所有的应用程序都是PE/COFF（一些为子系统封装NT系统调用的库和服务）可执行的。当一个用户态的程序启动的时候，启动器就会基于可执行的头部去引用适当的子系统来满足应用程序的依赖。
+后来版本的子系统替换掉了POSIX层，由用户态组件提供了Subsystem for Unix-based Applications (SUA)，满足：</p>
+<ol>
+<li>进程和信号管理</li>
+<li>终端管理</li>
+<li>系统服务请求和进程间通信</li>
+</ol>
+<p>SUA的主要目的是为了鼓励应用程序移植到Windows上，且尽可能少重写代码。这已经通过实现POSIX用户态API达到了。考虑到这些组件是用户态实现，很难跟内核态的系统调用（比如&quot;fork()&quot;）在语义上和效率上完全相对应。因为这种模式需要程序重新编译，它需要持续的功能移植，维护也是负担。
+随着时间的演变，这些早先的子系统都退出历史舞台了。但是因为Windows NT内核的架构允许新的子系统环境，微软就基于这领域的原始积累进行扩展，在2016年发布Windows Subsystem for Linux。</p>
+<h2>包含内容</h2>
+<p>Windows Subsystem for Linux
+WSL是一些组件的集合，允许原生的Linux ELF64二进制文件跑在Windows上。它同时包括了用户态和内核态组件，主要包含以下部分：</p>
+<ol>
+<li>用户态会话管理服务处理Linux实例的生命周期</li>
+<li>Pico provider drivers (lxss.sys, lxcore.sys)“翻译”系统调用，以模拟Linux内核</li>
+<li>Pico 进程管理原生的用户态Linux（比如/bin/bash）</li>
+</ol>
+<p>奇迹就发生于用户态的Linux二进制文件和Windows内核组件之间。通过将未经修改的Linux二进制文件放置于Pico进程中，我们把Linux系统调用直接导入Windows内核中。lxss.sys, lxcore.sys驱动将Linux系统调用翻译为NT APIs，来模拟Linux内核。</p>
+<h2>系统调用</h2>
+<p>WSL基于Windows NT内核虚拟了Linux内核接口，这允许它执行未经修改的Linux ELF64二进制文件。一类内核接口是系统调用。系统调用是内核为用户态程序提供的一种服务。Linux内核和Windows NT内核都为用户态程序提供了几百个系统调用，但是他们有不同的语义，并且一般来说并不直接兼容。比如Linux提供fork, open和kill，Windows NT提供相兼容NtCreateProcess, NtOpenFile和 NtTerminateProcess。
+Windows Subsystem for Linux 包含内核态驱动（lxss.sys和 lxcore.sys），以协调Linux系统调用的请求与Windows NT内核。驱动不包含Linux内核代码，但是是一个全新实现的Linux兼容的内核接口。在原生的Linux上，用户态程序请求一个系统调用，系统调用请求由Linux内核处理。在WSL，当一个系统调用由同一个可执行文件请求时，Windows NT内核把请求发送给lxcore.sys。 当可能时，lxcore.sys将Linux系统调用翻译成等价的Windows NT的调用，由它来完成繁重的工作。当没有可能的等价转换时，Windows内核态驱动需要直接处理请求。
+比如说，Linux中的 fork() 系统调用没有直接的等价的windows版本。当一个fork系统调用由Windows Subsystem for Linux产生时，lxcore.sys需要做一些复制进程的准备工作，然后调用Windows NT内核APIs来产生一个进程来正确实现fork操作，完成为新进程复制额外的数据。</p>
+<h2>文件系统</h2>
+<p>WSL支持的文件系统需要满足两个目标。</p>
+<ol>
+<li>提供一个完全支持Linux文件系统的环境</li>
+<li>能够与Windows上的设备和文件互通</li>
+</ol>
+<p>Windows Subsystem for Linuxt提供与真实Linux内核类似的虚拟文件系统。在用户的系统上，我们提供了两个文件系统：VolFs 和 DriveFs。</p>
+
+
+  <br><hr>
+  
+  <br><br>
+  
+  <a href="/">&larr; Back home</a>
+  <!-- GitTalk 评论开始 -->  
+    <div id="gitalk-container"></div>  
+    <link rel="stylesheet" href="/static/css/gitalk.css">  
+    <script src="/static/js/gitalk.min.js"></script>  
+    <script>  
+    var gitalk = new Gitalk({  
+      clientID: '01833724746bc911fcc0',  
+      clientSecret: 'a9eb76fcc9aa6faa298c0fcf6d0aceebc59cfa38',  
+      repo: 'gitalk',  
+      owner: 'jinhui66',  
+      admin: ['jinhui66'],  
+      id: location.pathname,      // Ensure uniqueness and length less than 50  
+      distractionFreeMode: false  // Facebook-like distraction free mode  
+    })  
+    gitalk.render('gitalk-container')  
+    
+    </script>  
+  <!-- GitTalk 评论结束 -->
+</div>
+
+  <footer class="footer">
+  &copy; 2024 - My WSL Website
+</footer>
+
+  <script>
+    const ham = document.querySelector('.navbar__hamburger')
+    const menu = document.querySelector('.navbar__mobile-links')
+    const darkToggleButtons = document.querySelectorAll('.dark-toggle')
+
+    function changeDarkToggleBtnIcon () {
+      darkToggleButtons.forEach(btn => {
+        if (btn.querySelector('img').src.indexOf('/static/img/moon.svg') !== -1) {
+          btn.querySelector('img').src = "/static/img/sun.svg"
+        } else {
+          btn.querySelector('img').src = "/static/img/moon.svg"
+        }
+      })
+    }
+
+    if (
+      localStorage.prefsDark === 'true' || 
+      (
+        window.matchMedia && 
+        window.matchMedia('(prefers-color-scheme: dark)').matches && 
+        localStorage.prefsDark !== 'false')
+      ) {
+      document.body.classList.add('dark')
+      changeDarkToggleBtnIcon()
+    }
+
+    ham.addEventListener('click', () => {
+      menu.classList.toggle('navbar__mobile-links--open')
+
+      let prevState = JSON.parse(ham.getAttribute('aria-expanded'))
+      ham.setAttribute('aria-expanded', !prevState)
+    })
+
+    darkToggleButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        changeDarkToggleBtnIcon()
+
+        if (document.body.classList.contains('dark')) {
+          document.body.classList.remove('dark')
+          localStorage.prefsDark = 'false'
+        } else {
+          document.body.classList.add('dark')
+          localStorage.prefsDark = 'true'
+        }
+
+      })
+    })
+  </script>
+</body>
+</html>
